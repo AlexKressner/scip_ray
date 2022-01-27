@@ -43,6 +43,7 @@ If this got you interest, have a look at this repo and see how to scale the non-
     ray dashboard config.yaml
   ```
   <img src="https://user-images.githubusercontent.com/25706472/151393482-ab535063-c246-4ca2-9c4c-1e7fe5dd70eb.png">
+
 10. Bring down the cluster
   ```sh
     ray down -y config.yaml
