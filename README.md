@@ -42,6 +42,10 @@ If this got you interest, have a look at this repo and see how to scale the non-
   ```sh
     ray dashboard config.yaml
   ```
+10. Bring down the cluster
+  ```sh
+    ray down -y config.yaml
+  ```
 
 
 
