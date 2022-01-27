@@ -1,9 +1,9 @@
 ## Building a SCIP optimization factory with Ray on Azure
-Most of us in ORMS know this situation: You have a neat MIP and want to run different experiments, i.e. use the same model with different problem data or solver settings. Consider the case where you do 75 experiments and each one takes 10 minutes. If you do the computations sequentially this sums up to 750 minutes or 12.5 hours. I remember the days when I started my laptop in the evening and had a look at the computations in the morning - to often just to notice that I have to change something (fix bugs, adjust the model, change the parameters, etc.) and do the computations again. 
+Most of us in ORMS know this situation: You have a neat mathematical optimization model (LP, MIP, ...) and want to run different experiments, i.e. use the same model with different problem data or solver settings. Consider the case where you do 75 experiments and each one takes 10 minutes. If you do the computations sequentially this sums up to **750 minutes** or **12.5 hours**. I remember the days when I started my laptop in the evening and had a look at the computations the next day in the morning - just to notice that I have to change something sooner or later (fix bugs, adjust the model, change the parameters, etc.) and do the computations again. 
 
-What if you could easily spin up an arbitrary large cluster of high-performance virtual machines in the cloud and do massive optimization exeperiments in parallel? Something like a solver factory...! 
+What if you could easily spin up an arbitrary large cluster of high-performance virtual machines in the cloud and do massive optimization exeperiments in parallel? Something like a **solver factory**...! 
 
-If this got you interest, have a look at this repo and see how to scale the non-commercial solver [SCIP](https://www.scipopt.org/index.php#about) with [Ray](https://www.ray.io) on Azure. For demonstration purposes, let's use the good old [capacitated lot sizing problem](https://www.sciencedirect.com/science/article/pii/S0305048303000598) and a small problem instance which SCIP can solve in approximately 27 seconds (optimization runs in one process with one CPU). Given a problem set of 100 of those small instances, **sequential execution** will be approx. **2700 seconds**. Spinning up a ray cluster with three virtual maschines (24 CPU) on Azure, **parallel execution** will give you a boost in experimentation speed of **factor 20** (**130 seconds** to solve all problem instances). 
+If this got you interest, have a look at this repo and see how to scale the non-commercial solver [SCIP](https://www.scipopt.org/index.php#about) with [Ray](https://www.ray.io) on Azure. For demonstration purposes, let's use the good old [capacitated lot sizing problem](https://www.sciencedirect.com/science/article/pii/S0305048303000598) and a small problem instance which SCIP can solve in approximately 27 seconds (optimization runs in one process with one CPU). Given a problem set of 100 of those small instances and **sequential execution**, you will have to wait for **2700 seconds** until all experiments are done. Spinning up a ray cluster with three virtual maschines (3 node with 8 CPU each) on Azure, **parallel execution** will give you a boost in experimentation speed of **factor 20** utilizing all 24 cores at the same time (**130 seconds** to solve all problem instances). 
 
 ## Files
 - ``script.py``: SCIP implementation of CLSP and ray code
@@ -42,6 +42,7 @@ If this got you interest, have a look at this repo and see how to scale the non-
   ```sh
     ray dashboard config.yaml
   ```
+  <img src="https://user-images.githubusercontent.com/25706472/151393482-ab535063-c246-4ca2-9c4c-1e7fe5dd70eb.png">
 10. Bring down the cluster
   ```sh
     ray down -y config.yaml
