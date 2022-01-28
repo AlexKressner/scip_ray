@@ -3,12 +3,12 @@ Most of us in ORMS know this situation: You have a neat mathematical optimizatio
 
 What if you could easily spin up an arbitrary large cluster of high-performance virtual machines in the cloud and do massive optimization exeperiments in parallel? Something like a **solver factory**...! 
 
-If this got you interest, have a look at this repo and see how to scale the non-commercial solver [SCIP](https://www.scipopt.org/index.php#about) with [Ray](https://www.ray.io) on Azure. For demonstration purposes, let's use the good old [capacitated lot sizing problem](https://www.sciencedirect.com/science/article/pii/S0305048303000598) and a small problem instance which SCIP can solve in approximately 27 seconds (optimization runs in one process with one CPU). Given a problem set of 100 of those small instances and **sequential execution**, you will have to wait for **2700 seconds** until all experiments are done. Spinning up a ray cluster with three virtual maschines (3 node with 8 CPU each) on Azure, **parallel execution** will give you a boost in experimentation speed of **factor 20** utilizing all 24 cores at the same time (**130 seconds** to solve all problem instances). 
+If this got you interest, have a look at this repo and see how to scale the non-commercial solver [SCIP](https://www.scipopt.org/index.php#about) with [Ray](https://www.ray.io) on Azure (you can also deploy to other [cloud providers](https://docs.ray.io/en/latest/cluster/quickstart.html)). For demonstration purposes, let's use the good old [capacitated lot sizing problem](https://www.sciencedirect.com/science/article/pii/S0305048303000598) and a small problem instance which SCIP can solve in approximately 27 seconds (optimization runs in one process with one CPU). Given a problem set of 100 of those small instances and **sequential execution**, you will have to wait for **2700 seconds** until all experiments are done. Spinning up a ray cluster with three virtual maschines (3 node with 8 CPU each) on Azure, **parallel execution** will give you a boost in experimentation speed of **factor 20** utilizing all 24 cores at the same time (**130 seconds** to solve all problem instances). 
 
 ## Files
 - ``script.py``: SCIP implementation of CLSP and ray code
-- ``config.yaml``: Config file to deploy ray cluster
-- ``data/``: Folder containing problem data which is synced to nodes of ray cluster
+- ``config.yaml``: Config file to deploy ray cluster including set up commands for ``pyscipopt``
+- ``data/``: Folder containing problem data which is synced to nodes in ray cluster
 - ``requirements.txt``: Python dependencies
 
 ## Getting started
